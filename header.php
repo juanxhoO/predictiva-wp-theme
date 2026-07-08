@@ -22,13 +22,31 @@
     <div id="page" class="min-h-screen flex flex-col">
         <?php do_action('tailpress_header'); ?>
 
-        <header class="container mx-auto py-6">
-            <div class="md:flex md:justify-between md:items-center">
+        <header class="w-full py-6">
+            <?php
+            $phone = get_theme_mod('site_phone');
+            $email = get_theme_mod('site_email');
+            $address = get_theme_mod('site_address');
+            ?>
 
+            <div class="md:flex w-full md:justify-between mb-2 px-[2rem]">
+                <div class="flex items-center gap-6">
 
+                    <?php if ($phone): ?>
+                        <a href="tel:<?= esc_attr($phone); ?>" class="flex items-center gap-2">
+                            <?= esc_html($phone); ?>
+                        </a>
+                    <?php endif; ?>
+
+                    <?php if ($email): ?>
+                        <a href="mailto:<?= esc_attr($email); ?>" class="flex items-center gap-2">
+                            <?= esc_html($email); ?>
+                        </a>
+                    <?php endif; ?>
+                </div>
             </div>
             <div class="md:flex md:justify-between md:items-center">
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center px-[2rem]">
                     <div>
                         <?php if (has_custom_logo()): ?>
                             <?php the_custom_logo(); ?>
@@ -68,17 +86,14 @@
                         <?php else: ?>
                             <?php
                             wp_nav_menu([
-                                'container_id' => 'primary-menu',
-                                'container_class' => '',
-                                'menu_class' => 'md:flex md:-mx-4 [&_a]:!no-underline',
                                 'theme_location' => 'primary',
-                                'li_class' => 'md:mx-4',
-                                'fallback_cb' => false,
+                                'container' => false,
+                                'menu_class' => 'flex gap-8 items-center',
+                                'walker' => new \TailPress\Walkers\MegaMenuWalker(),
                             ]);
                             ?>
                         <?php endif; ?>
                     </nav>
-
                     <!-- <div class="inline-block mt-4 md:mt-0"><?php get_search_form(); ?></div> -->
                 </div>
             </div>
