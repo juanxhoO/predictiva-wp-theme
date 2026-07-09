@@ -74,7 +74,7 @@ class MegaMenuWalker extends \Walker_Nav_Menu
                 esc_url($item->url)
             );
 
-            $output .= '<div class="font-medium">';
+            $output .= '<div>';
             $output .= esc_html($item->title);
             $output .= '</div>';
 

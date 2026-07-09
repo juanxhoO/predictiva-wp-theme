@@ -39,7 +39,6 @@
     text-decoration: none;
     padding-block: 1rem;
     font-size: 0.8125rem;
-    /* 13 px */
     font-weight: 500;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -51,7 +50,7 @@
   .nav-primary>li>a::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     left: 0;
     right: 0;
     height: 2px;
@@ -94,6 +93,7 @@
 
   /* ─── Dropdown wrapper ────────────────────────────────────────────── */
   .mega-menu-wrapper {
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
     position: absolute;
     left: 0;
     top: 100%;
@@ -101,7 +101,7 @@
     padding-top: 8px;
     /* visual gap lives INSIDE the wrapper → still hoverable */
     min-width: 220px;
-    transform: translateX(40%) translateY(6px);
+    /* transform: translateX(40%) translateY(6px); */
     pointer-events: none;
     visibility: hidden;
     opacity: 0;
@@ -117,7 +117,6 @@
       position: absolute;
       top: 3px;
       left: 0;
-      transform: translateX(40%);
       width: 10px;
       height: 10px;
       background: #fff;
@@ -131,7 +130,7 @@
   .group:hover>.mega-menu-wrapper {
     visibility: visible;
     opacity: 1;
-    transform: translateX(40%) translateY(0);
+    /* transform: translateX(40%) translateY(0); */
     pointer-events: auto;
     transition:
       opacity 220ms cubic-bezier(0.4, 0, 0.2, 1),
@@ -192,7 +191,6 @@
 
   .submenu>li>a .font-medium {
     font-size: 0.875rem;
-    font-weight: 500;
     color: var(--color-zinc-800, #27272a);
     line-height: 1.4;
     transition: color 180ms ease;
