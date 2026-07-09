@@ -22,30 +22,39 @@
     <div id="page" class="min-h-screen flex flex-col">
         <?php do_action('tailpress_header'); ?>
 
-        <header class="w-full py-6">
-            <?php
-            $phone = get_theme_mod('site_phone');
-            $email = get_theme_mod('site_email');
-            $address = get_theme_mod('site_address');
-            ?>
+        <header class="w-full relative">
+            <div class="flex contact-bar justify-end bg-blue-500 gap-10 py-2 w-full px-[4rem]">
+                <div class="flex gap-4 items-center justify-end">
+                    <?
 
-            <div class="md:flex w-full md:justify-between mb-2 px-[2rem]">
-                <div class="flex items-center gap-6">
+                    $socials = ThemeOptions::socials();
 
-                    <?php if ($phone): ?>
-                        <a href="tel:<?= esc_attr($phone); ?>" class="flex items-center gap-2">
-                            <?= esc_html($phone); ?>
+                    foreach ($socials as $network => $url) {
+                        if (empty($url)) {
+                            continue;
+                        }
+                        ?>
+                        <a href="<?= esc_url($url) ?>" class="text-xl hover:text-primary transition" target="_blank"
+                            rel="noopener noreferrer" aria-label="<?= esc_attr(ucfirst($network)) ?>">
+                            <?= Icon::social($network) ?>
                         </a>
-                    <?php endif; ?>
+                        <?php
+                    }
+                    ?>
 
-                    <?php if ($email): ?>
-                        <a href="mailto:<?= esc_attr($email); ?>" class="flex items-center gap-2">
-                            <?= esc_html($email); ?>
-                        </a>
-                    <?php endif; ?>
+                </div>
+                <div class="flex gap-6">
+                    <a href="tel:<?= esc_attr(ThemeOptions::phone()); ?>" class="flex text-white items-center gap-2">
+                        <i class="fa-solid fa-phone"></i>
+                        <?= esc_html(ThemeOptions::phone()); ?>
+                    </a>
+                    <a href="mailto:<?= esc_attr(ThemeOptions::email()); ?>" class="flex text-white items-center gap-2">
+                        <i class="fa-solid fa-envelope"></i>
+                        <?= esc_html(ThemeOptions::email()); ?>
+                    </a>
                 </div>
             </div>
-            <div class="md:flex md:justify-between md:items-center">
+            <div class="md:flex md:justify-center md:items-center">
                 <div class="flex justify-between items-center px-[2rem]">
                     <div>
                         <?php if (has_custom_logo()): ?>
@@ -66,11 +75,18 @@
 
                     <?php if (has_nav_menu('primary')): ?>
                         <div class="md:hidden">
-                            <button type="button" aria-label="Toggle navigation" id="primary-menu-toggle">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                    stroke="currentColor" class="size-6">
+                            <button type="button" aria-label="Toggle navigation" aria-expanded="false"
+                                id="primary-menu-toggle">
+                                <!-- Hamburger icon (shown by default) -->
+                                <svg class="icon-open size-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                                </svg>
+                                <!-- Close icon (hidden by default) -->
+                                <svg class="icon-close size-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                                 </svg>
                             </button>
                         </div>
@@ -78,7 +94,7 @@
                 </div>
 
                 <div id="primary-navigation"
-                    class="hidden md:flex md:bg-transparent gap-6 items-center border border-light md:border-none rounded-xl p-4 md:p-0">
+                    class="hidden md:flex md:bg-transparent gap-6 items-center border border-light md:border-none rounded-xl p-4 md:p-0 mobile-nav">
                     <nav>
                         <?php if (current_user_can('administrator') && !has_nav_menu('primary')): ?>
                             <a href="<?php echo esc_url(admin_url('nav-menus.php')); ?>"
@@ -88,7 +104,7 @@
                             wp_nav_menu([
                                 'theme_location' => 'primary',
                                 'container' => false,
-                                'menu_class' => 'flex gap-8 items-center',
+                                'menu_class' => 'nav-primary flex gap-8 items-center',
                                 'walker' => new \TailPress\Walkers\MegaMenuWalker(),
                             ]);
                             ?>
@@ -112,12 +128,12 @@
                                 d="M98.23 31.4c-2.51-2.25-5.93-3.37-10.27-3.37s-7.9 1.08-11.16 3.23-5.94 5.16-8.05 9.01c-2.1 3.86-3.57 8.35-4.41 13.49-.84 5.2-.84 9.77 0 13.69s2.51 6.98 5.04 9.18c2.52 2.2 5.86 3.3 10 3.3s8.08-1.15 11.33-3.45c3.24-2.3 5.94-5.42 8.07-9.37 2.14-3.95 3.64-8.4 4.51-13.35.77-4.88.75-9.27-.07-13.16-.82-3.89-2.48-6.96-4.99-9.2Z" />
                         </svg>
                         <div class="[&_a]:text-primary">
-                            <h1
-                                class="leading-tight text-3xl md:text-5xl font-medium tracking-tight text-balance text-zinc-950">
-                                Rapidly build your next WordPress theme with Taidsdlwind CSS
+                            <h1 class=" p-2 text-red-800 leading-tight text-3xl md:text-5xl font-medium tracking-tight">
+                                Rapidly build your next WordPdsdess theme with Taidsdlwinwwed CSS
                             </h1>
                             <p class="my-6 text-lg md:text-xl text-zinc-600 leading-8">
-                                <a href="https://tailpress.io">TailPress</a> is a <a href="https://tailwindcss.com">Tailwind
+                                <a className="font-medium text-red-600" href="https://tailpress.io">TailPredsdss</a> is a <a
+                                    href="https://tailwindcss.com">Tailwind
                                     CSS</a> flavoured <a href="https://wordpress.org">WordPress</a>
                                 boilerplate theme. It's your go-to starting point for building custom WordPress themes with
                                 modern tools and practices.

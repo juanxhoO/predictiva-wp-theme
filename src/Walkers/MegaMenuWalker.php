@@ -47,35 +47,30 @@ class MegaMenuWalker extends \Walker_Nav_Menu
             $output .= '<li class="relative group">';
 
             $output .= sprintf(
-                '<a href="%s" class="flex items-center gap-2 py-6 font-medium text-gray-700 hover:text-black transition">',
+                '<a href="%s" class="flex items-center gap-1.5 no-underline">',
                 esc_url($item->url)
             );
 
             $output .= esc_html($item->title);
 
+            $output .= '</a>';
+
             if ($has_children) {
-
+                // Separate button used only on mobile for accordion expand
                 $output .= '
-                <svg class="h-4 w-4 transition-transform duration-300 group-hover:rotate-180"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24">
-
-                    <path stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"/>
-
-                </svg>';
+                <button class="mobile-expand-btn" aria-expanded="false" aria-label="Expand sub-menu">
+                    <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>';
             }
 
-            $output .= '</a>';
         } else {
 
             $output .= '<li>';
 
             $output .= sprintf(
-                '<a href="%s" class="block rounded-xl p-4 hover:bg-gray-50 transition">',
+                '<a href="%s">',
                 esc_url($item->url)
             );
 
@@ -86,7 +81,7 @@ class MegaMenuWalker extends \Walker_Nav_Menu
             if (!empty($item->description)) {
 
                 $output .= sprintf(
-                    '<div class="mt-1 text-sm text-gray-500">%s</div>',
+                    '<div class="mt-1">%s</div>',
                     esc_html($item->description)
                 );
             }

@@ -2,9 +2,10 @@
 @import './theme.css';
 @import './utilities.css';
 @import './custom.css' layer(utilities);
-
+@import "@fortawesome/fontawesome-free/css/all.min.css";
 @source '../../vendor/tailpress/framework/**/*.php';
 @source '../../vendor/tailpress/framework/**/**/*.php';
+@source "../../**/*.php";
 
 @utility container {
   margin-inline: auto;
@@ -32,20 +33,340 @@
 
 @layer components {
 
+  /* ─── Top-level nav link ──────────────────────────────────────────── */
+  .nav-primary>li>a {
+    position: relative;
+    text-decoration: none;
+    padding-block: 1rem;
+    font-size: 0.8125rem;
+    /* 13 px */
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-zinc-600, #52525b);
+    text-decoration: none !important;
+    transition: color 200ms ease;
+  }
+
+  .nav-primary>li>a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-primary, #2563eb);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-primary>li:hover>a,
+  .nav-primary>li>a:focus-visible {
+    color: var(--color-zinc-900, #18181b);
+  }
+
+  .nav-primary>li:hover>a::after {
+    transform: scaleX(1);
+  }
+
+  /* Chevron inside top-level link */
+  .nav-primary>li>a svg {
+    flex-shrink: 0;
+    width: 0.875rem;
+    height: 0.875rem;
+    color: var(--color-zinc-400, #a1a1aa);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+      color 200ms ease;
+  }
+
+  .nav-primary>li:hover>a svg {
+    transform: rotate(180deg);
+    color: var(--color-zinc-600, #52525b);
+  }
+
+  /* Explicit chevron sizing */
+  .chevron {
+    flex-shrink: 0;
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  /* ─── Dropdown wrapper ────────────────────────────────────────────── */
   .mega-menu-wrapper {
-    @apply absolute hidden left-1/2 top-full w-[960px] -translate-x-1/2 invisible opacity-0 translate-y-3 transition-all duration-300;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    /* flush — no gap, so hover never breaks */
+    padding-top: 8px;
+    /* visual gap lives INSIDE the wrapper → still hoverable */
+    min-width: 220px;
+    transform: translateX(40%) translateY(6px);
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      opacity 220ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0ms linear 220ms;
+    z-index: 50;
+
+    /* Subtle top-indicator triangle (sits in the padding gap) */
+    &::before {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 0;
+      transform: translateX(40%);
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-left: 1px solid rgba(0, 0, 0, 0.07);
+      border-top: 1px solid rgba(0, 0, 0, 0.07);
+      rotate: 45deg;
+      z-index: 1;
+    }
   }
 
   .group:hover>.mega-menu-wrapper {
-    @apply block visible opacity-100 translate-y-0;
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(40%) translateY(0);
+    pointer-events: auto;
+    transition:
+      opacity 220ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0ms linear 0ms;
   }
 
+  /* ─── Dropdown panel ──────────────────────────────────────────────── */
   .mega-menu {
-    @apply bg-white rounded-3xl border border-gray-200 shadow-2xl grid grid-cols-3 gap-2 p-8;
+    position: relative;
+    display: flex;
+    gap: 0;
+    background: #ffffff;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.04),
+      0 10px 24px -4px rgba(0, 0, 0, 0.09),
+      0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+    list-style: none;
+    margin: 0;
+    z-index: 2;
+  }
+
+  /* Hide mobile-only expand button on desktop */
+  .mobile-expand-btn {
+    display: none;
+  }
+
+  .mega-menu a {
+    text-decoration: none !important;
+  }
+
+  /* ─── Sub-menu column ─────────────────────────────────────────────── */
+  .submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    min-width: 200px;
+  }
+
+  /* ─── Sub-menu items ──────────────────────────────────────────────── */
+  .submenu>li>a {
+    display: block;
+    padding: 0.625rem 0.875rem;
+    border-radius: 0.625rem;
+    text-decoration: none !important;
+    transition: background 180ms ease, color 180ms ease;
+  }
+
+  .submenu>li>a:hover {
+    background: var(--color-zinc-50, #fafafa);
+  }
+
+  .submenu>li>a .font-medium {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-zinc-800, #27272a);
+    line-height: 1.4;
+    transition: color 180ms ease;
+  }
+
+  .submenu>li>a:hover .font-medium {
+    color: var(--color-zinc-950, #09090b);
+  }
+
+  .submenu>li>a div.mt-1 {
+    margin-top: 0.125rem;
+    font-size: 0.75rem;
+    color: var(--color-zinc-400, #a1a1aa);
+    line-height: 1.5;
+  }
+
+}
+
+.contact-bar a {
+  text-decoration: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE NAV  (below md = 782 px)
+   ═══════════════════════════════════════════════════════════════════ */
+@media (max-width: 781px) {
+
+  /* Drawer panel */
+  .mobile-nav {
+    display: block !important;
+    /* override Tailwind 'hidden' after JS opens */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
+    padding: 1rem 1.5rem 1.5rem;
+    z-index: 100;
+    overflow: hidden;
+  }
+
+  /* Hide the drawer initially — JS removes 'hidden' class */
+  #primary-navigation.hidden {
+    display: none !important;
+  }
+
+  /* Stacked vertical menu */
+  .nav-primary {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+  }
+
+  /* Each top-level item: full row with expand button on the right */
+  .nav-primary>li {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .nav-primary>li:last-child {
+    border-bottom: none;
+  }
+
+  /* Top-level link takes all available width */
+  .nav-primary>li>a {
+    flex: 1;
+    padding-block: 0.875rem;
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-zinc-700, #3f3f46);
+    text-decoration: none !important;
+  }
+
+  /* No underline indicator on mobile */
+  .nav-primary>li>a::after {
+    display: none;
+  }
+
+  /* ── Mobile expand button ── */
+  .mobile-expand-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.5rem;
+    border: none;
+    background: transparent;
+    color: var(--color-zinc-400, #a1a1aa);
+    cursor: pointer;
+    transition: background 150ms ease, color 150ms ease;
+  }
+
+  .mobile-expand-btn:hover {
+    background: var(--color-zinc-100, #f4f4f5);
+    color: var(--color-zinc-700, #3f3f46);
+  }
+
+  .mobile-expand-btn .chevron {
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-expand-btn.is-open .chevron {
+    transform: rotate(180deg);
+  }
+
+  /* ── Accordion sub-menu ── */
+  /* Desktop dropdown mechanics are fully disabled on mobile */
+  .mega-menu-wrapper {
+    position: static !important;
+    transform: none !important;
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    padding-top: 0;
+    transition:
+      max-height 280ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 200ms ease,
+      visibility 0ms linear 280ms;
+    width: 100%;
+
+    /* Reset desktop triangle */
+    &::before {
+      display: none;
+    }
+  }
+
+  .mega-menu-wrapper.mobile-open {
+    visibility: visible;
+    opacity: 1;
+    max-height: 600px;
+    transition:
+      max-height 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 200ms ease,
+      visibility 0ms linear 0ms;
+  }
+
+  /* Group hover must do nothing on mobile */
+  .group:hover>.mega-menu-wrapper {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .group:hover>.mega-menu-wrapper.mobile-open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Sub-menu panel flat layout on mobile */
+  .mega-menu {
+    flex-direction: column;
+    border-radius: 0.625rem;
+    border: none;
+    box-shadow: none;
+    background: var(--color-zinc-50, #fafafa);
+    padding: 0.375rem 0;
+    margin: 0.25rem 0 0.75rem;
   }
 
   .submenu {
-    @apply ml-6 mt-2 space-y-2;
+    min-width: unset;
+    width: 100%;
   }
 
+  .submenu>li>a .font-medium {
+    font-size: 0.875rem;
+  }
 }

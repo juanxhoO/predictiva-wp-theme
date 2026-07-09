@@ -5,21 +5,22 @@ export default defineConfig(({ command }) => {
     const isBuild = command === 'build';
 
     return {
+        // En "serve", apuntamos directo al servidor de Vite expuesto
+        base: isBuild ? '/wp-content/themes/predictiva-wp-theme/dist/' : 'http://localhost:3000/',
 
-        base: isBuild ? '/wp-content/themes/tailpress/dist/' : '/',
         server: {
             host: "0.0.0.0",
             port: 3000,
             cors: true,
-
             strictPort: true,
-            origin: 'http://tailpress.test',
+            // Cambiado a la URL completa para evitar bloqueos de CORS en assets de fuentes/imágenes
+            origin: 'http://localhost:3000',
             watch: {
                 usePolling: true,
                 interval: 100,
             },
             hmr: {
-                host: 'localhost', // or your Docker host/domain
+                host: 'localhost',
                 port: 3000,
             },
         },
@@ -35,7 +36,7 @@ export default defineConfig(({ command }) => {
             },
         },
         plugins: [
-            tailwindcss(),
+            tailwindcss()
         ],
     }
 });
