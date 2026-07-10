@@ -27,6 +27,26 @@
           "name": "Light",
           "slug": "light",
           "color": "#F4F4F5"
+        },
+        {
+          "name": "Brand Blue Light",
+          "slug": "brand-blue-light",
+          "color": "#003399"
+        },
+        {
+          "name": "Brand Blue Dark",
+          "slug": "brand-blue-dark",
+          "color": "#0F172A"
+        },
+        {
+          "name": "Brand Red",
+          "slug": "brand-red",
+          "color": "#C53030"
+        },
+        {
+          "name": "Brand Green",
+          "slug": "brand-green",
+          "color": "#2E7D32"
         }
       ]
     },

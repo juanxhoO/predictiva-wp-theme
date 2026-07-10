@@ -14,6 +14,10 @@
     <link rel="profile" href="https://gmpg.org/xfn/11">
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
     <?php wp_head(); ?>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body <?php body_class('bg-white text-zinc-900 antialiased'); ?>>
@@ -23,8 +27,8 @@
         <?php do_action('tailpress_header'); ?>
 
         <header class="w-full relative">
-            <div class="flex contact-bar justify-end bg-blue-500 gap-10 py-2 w-full px-[4rem]">
-                <div class="flex gap-4 items-center justify-end">
+            <div class="flex contact-bar justify-center md:justify-end bg-brand-blue-dark gap-10 py-1 w-full px-[4rem]">
+                <div class="flex gap-4 hidden md:flex items-center justify-end">
                     <?
 
                     $socials = ThemeOptions::socials();
@@ -34,8 +38,8 @@
                             continue;
                         }
                         ?>
-                        <a href="<?= esc_url($url) ?>" class="text-xl hover:text-primary transition" target="_blank"
-                            rel="noopener noreferrer" aria-label="<?= esc_attr(ucfirst($network)) ?>">
+                        <a href="<?= esc_url($url) ?>" class="text-xl text-white hover:text-brand-red transition"
+                            target="_blank" rel="noopener noreferrer" aria-label="<?= esc_attr(ucfirst($network)) ?>">
                             <?= Icon::social($network) ?>
                         </a>
                         <?php
@@ -43,18 +47,21 @@
                     ?>
 
                 </div>
-                <div class="flex gap-6">
-                    <a href="tel:<?= esc_attr(ThemeOptions::phone()); ?>" class="flex text-white items-center gap-2">
+                <div class="flex gap-4">
+                    <a href="tel:<?= esc_attr(ThemeOptions::phone()); ?>"
+                        class="flex text-white hover:text-brand-red items-center gap-2">
                         <i class="fa-solid fa-phone"></i>
                         <?= esc_html(ThemeOptions::phone()); ?>
                     </a>
-                    <a href="mailto:<?= esc_attr(ThemeOptions::email()); ?>" class="flex text-white items-center gap-2">
+                    <a href="mailto:<?= esc_attr(ThemeOptions::email()); ?>"
+                        class="flex text-white hover:text-brand-red items-center gap-2">
                         <i class="fa-solid fa-envelope"></i>
                         <?= esc_html(ThemeOptions::email()); ?>
                     </a>
                 </div>
             </div>
-            <div class="md:flex md:justify-center md:items-center">
+            <div
+                class="main-menu-container md:flex md:justify-center md:items-center w-full bg-white z-20 transition-all duration-300 top-0">
                 <div class="flex justify-between items-center p-4 md:px-[2rem]">
                     <div>
                         <?php if (has_custom_logo()): ?>
@@ -94,8 +101,8 @@
                 </div>
 
                 <div id="primary-navigation"
-                    class="hidden md:flex md:bg-transparent gap-6 items-center border border-light md:border-none rounded-xl p-4 md:p-0 mobile-nav">
-                    <div class="mobile-nav-header flex items-center justify-between py-4">
+                    class="hidden md:flex md:bg-transparent gap-6 items-center p-4 md:p-0 mobile-nav">
+                    <div class="mobile-nav-header flex items-center justify-between pb-2">
                         <div>
                             <?php if (has_custom_logo()): ?>
                                 <?php the_custom_logo(); ?>

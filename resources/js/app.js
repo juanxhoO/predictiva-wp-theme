@@ -57,3 +57,17 @@ window.addEventListener('load', function () {
         });
     });
 });
+
+
+
+window.addEventListener('scroll', function () {
+    const header = document.querySelector('.main-menu-container');
+    const contactNbar = this.document.querySelector('.contact-bar')
+    if (header) {
+        if (window.scrollY > contactNbar.offsetHeight) {
+            header.classList.add('fixed');
+        } else {
+            header.classList.remove('fixed');
+        }
+    }
+});

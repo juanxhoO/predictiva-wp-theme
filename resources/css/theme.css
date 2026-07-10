@@ -11,6 +11,23 @@
     --color-dark: var(--wp--preset--color--dark);
     --color-light: var(--wp--preset--color--light);
 
+
+
+    --color-primary: var(--wp--preset--color--primary);
+    --color-secondary: var(--wp--preset--color--secondary);
+    --color-dark: var(--wp--preset--color--dark);
+    --color-light: var(--wp--preset--color--light);
+
+
+
+    --color-brand-blue-light: var(--wp--preset--color--brand-blue-light);
+    --color-brand-blue-dark: var(--wp--preset--color--brand-blue-dark);
+    --color-brand-red: var(--wp--preset--color--brand-red);
+    --color-brand-green: var(--wp--preset--color--brand-green);
+
+
+
+
     --text-xs: var(--wp--preset--font-size--xs, 0.75rem);
     --text-sm: var(--wp--preset--font-size--sm, 0.875rem);
     --text-base: var(--wp--preset--font-size--base, 1rem);
