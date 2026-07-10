@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="md:flex md:justify-center md:items-center">
-                <div class="flex justify-between items-center px-[2rem]">
+                <div class="flex justify-between items-center p-4 md:px-[2rem]">
                     <div>
                         <?php if (has_custom_logo()): ?>
                             <?php the_custom_logo(); ?>
@@ -95,6 +95,32 @@
 
                 <div id="primary-navigation"
                     class="hidden md:flex md:bg-transparent gap-6 items-center border border-light md:border-none rounded-xl p-4 md:p-0 mobile-nav">
+                    <div class="mobile-nav-header flex items-center justify-between py-4">
+                        <div>
+                            <?php if (has_custom_logo()): ?>
+                                <?php the_custom_logo(); ?>
+                            <?php else: ?>
+                                <div class="flex items-center gap-2">
+                                    <a href="<?php echo esc_url(home_url('/')); ?>"
+                                        class="!no-underline lowercase font-medium text-lg">
+                                        <?php bloginfo('name'); ?>
+                                    </a>
+                                    <?php if ($description = get_bloginfo('description')): ?>
+                                        <span class="text-sm font-light text-dark/80">|</span>
+                                        <span class="text-sm font-light text-dark/80">
+                                            <?php echo esc_html($description); ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+
+                        <button id="primary-menu-close-btn" type="button">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+
+                    </div>
+
                     <nav>
                         <?php if (current_user_can('administrator') && !has_nav_menu('primary')): ?>
                             <a href="<?php echo esc_url(admin_url('nav-menus.php')); ?>"
@@ -104,7 +130,7 @@
                             wp_nav_menu([
                                 'theme_location' => 'primary',
                                 'container' => false,
-                                'menu_class' => 'nav-primary flex gap-8 items-center',
+                                'menu_class' => 'nav-primary gap-2 flex items-center',
                                 'walker' => new \TailPress\Walkers\MegaMenuWalker(),
                             ]);
                             ?>
