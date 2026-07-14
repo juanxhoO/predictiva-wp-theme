@@ -65,7 +65,10 @@
                 <div class="flex justify-between items-center p-4 md:px-[2rem]">
                     <div>
                         <?php if (has_custom_logo()): ?>
-                            <?php the_custom_logo(); ?>
+                            <div class="relative max-w-[200px]">
+                                <?php the_custom_logo(); ?>
+                            </div>
+
                         <?php else: ?>
                             <div class="flex items-center gap-2">
                                 <a href="<?php echo esc_url(home_url('/')); ?>"

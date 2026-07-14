@@ -186,6 +186,11 @@ class ThemeOptions
         return get_theme_mod('site_phone');
     }
 
+    public static function address()
+    {
+        return get_theme_mod('site_address');
+    }
+
     public static function email()
     {
         return get_theme_mod('site_email');

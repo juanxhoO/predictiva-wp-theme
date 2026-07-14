@@ -25,7 +25,8 @@
                 <div class="my-4">
                     <div class=" flex flex-col gap-2 text-white">
 
-                        <p class="inline"><strong class="text-brand-red">Dirección:</strong> Av. Siempre Viva 742</p>
+                        <p class="inline"><strong class="text-brand-red">Dirección:</strong>
+                            <?= esc_html(ThemeOptions::address()) ?></p>
                         <p><strong class="text-brand-red">Teléfono:</strong> <a class="!no-underline"
                                 href="tel:<?= esc_attr(ThemeOptions::phone()) ?>">
                                 <?= esc_html(ThemeOptions::phone()) ?>
@@ -74,7 +75,7 @@
         <?php do_action('tailpress_footer'); ?>
         <div class=" text-ms items-center flex gap-4 text-white  justify-center w-full my-4">
             &copy; <?php echo esc_html(date_i18n('Y')); ?> - <?php bloginfo('name'); ?>
-            <p class="ml-2 text-xs">Desarrollado Por Juan Granja</p>
+            <p class="ml-2 text-xs">Desarrollado Por juangranja.dev@gmail.com</p>
         </div>
     </div>
 </footer>
