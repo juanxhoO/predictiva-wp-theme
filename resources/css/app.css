@@ -421,11 +421,20 @@ body {
 }
 
 .form-group .wpcf7-form-control {
+  width: 100%;
   border: 2px solid #003399;
   padding: 8px;
 }
 
-
 .form-group label {
+  font-weight: 500;
+}
+
+/* Footer Customs */
+.menu-footer-1-container a {
+  font-size: 1.125rem;
+}
+
+.menu-footer-1-container a:hover {
   font-weight: 500;
 }
