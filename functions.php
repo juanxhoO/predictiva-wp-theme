@@ -230,6 +230,12 @@ class Icon
 }
 
 
+add_action('init', function () {
+    (new \TailPress\PostTypes\ServicePostType())->register();
+});
 
+add_action('acf/init', function () {
+    (new \TailPress\CustomFields\ServiceFields())->register();
+});
 
 
