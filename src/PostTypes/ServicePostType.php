@@ -19,7 +19,7 @@ class ServicePostType
             ],
             'public' => true,
             'menu_icon' => 'dashicons-admin-tools',
-            'has_archive' => true,
+            'has_archive' => false,
             'rewrite' => [
                 'slug' => 'servicios'
             ],

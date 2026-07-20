@@ -239,3 +239,31 @@ add_action('acf/init', function () {
 });
 
 
+add_action('init', function () {
+    (new \TailPress\PostTypes\EquipmentPostType())->register();
+});
+
+add_action('acf/init', function () {
+    (new \TailPress\CustomFields\EquipmentFields())->register();
+});
+
+
+
+add_action('init', function () {
+    register_taxonomy(
+        'service_category',
+        ['service'],
+        [
+            'labels' => [
+                'name' => 'Categorías de Servicios',
+                'singular_name' => 'Categoría de Servicio',
+            ],
+            'hierarchical' => true,
+            'show_admin_column' => true,
+            'show_in_rest' => true,
+            'rewrite' => [
+                'slug' => 'categoria-servicio'
+            ],
+        ]
+    );
+});
