@@ -160,9 +160,9 @@ function predictiva_registrar_widgets()
         'name' => __('Footer Widget 1', 'predictiva-wp-theme'),
         'id' => 'footer-widget-1',
         'description' => __('Área de widgets que aparece en el lateral o pie de página.', 'predictiva-wp-theme'),
-        'before_widget' => '<section id="%1$s" class="widget p-6 bg-white rounded-xl shadow-sm mb-6 border border-slate-100">',
+        'before_widget' => '<section id="%1$s" class="widget text-white px-6 ">',
         'after_widget' => '</section>',
-        'before_title' => '<h3 class="widget-title text-lg font-bold text-slate-800 mb-4 pb-2 border-b border-slate-100">',
+        'before_title' => '<h3 class="inline-block widget-title text-2xl font-bold  border-b-4 border-brand-red pb-1 text-white mb-4">',
         'after_title' => '</h3>',
     ));
 
@@ -170,9 +170,9 @@ function predictiva_registrar_widgets()
         'name' => __('Footer Widget 2', 'predictiva-wp-theme'),
         'id' => 'footer-widget-2',
         'description' => __('Área de widgets que aparece en el lateral o pie de página.', 'predictiva-wp-theme'),
-        'before_widget' => '<section id="%1$s" class="widget p-6 bg-white rounded-xl shadow-sm mb-6 border border-slate-100">',
+        'before_widget' => '<section id="%1$s" class="widget px-6  text-white rounded-xl shadow-sm mb-6 ">',
         'after_widget' => '</section>',
-        'before_title' => '<h3 class="widget-title text-lg font-bold text-slate-800 mb-4 pb-2 border-b border-slate-100">',
+        'before_title' => '<h3 class="inline-block widget-title text-2xl font-bold  border-b-4 border-brand-red pb-1 text-white mb-4">',
         'after_title' => '</h3>',
     ));
 }

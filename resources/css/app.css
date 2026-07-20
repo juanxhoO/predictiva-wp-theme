@@ -35,7 +35,7 @@ body {
     position: relative;
     text-decoration: none;
     padding-block: 1rem;
-    font-size: 0.8125rem;
+    font-size: 0.8725rem;
     font-weight: 500;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -206,7 +206,7 @@ body {
     height: 100%;
     top: 0;
     position: fixed;
-    z-index: 30;
+    z-index: 18;
     background-color: #000000bd;
   }
 
@@ -290,7 +290,7 @@ body {
   .nav-primary>li>a {
     flex: 1;
     padding-block: 0.875rem;
-    font-size: 0.8125rem;
+    font-size: 0.8725rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--color-zinc-700, #3f3f46);
@@ -395,4 +395,46 @@ body {
   .submenu>li>a .font-medium {
     font-size: 0.875rem;
   }
+}
+
+
+.wpcf7-submit {
+  color: white;
+  cursor: pointer;
+  background: #C53030;
+  padding: 1rem 3rem;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.wpcf7-submit:hover {
+  background: #003399;
+  transition: 0.6s;
+}
+
+.form-group {
+  margin-bottom: .825rem;
+}
+
+.form-group label {
+  font-weight: 500;
+}
+
+.form-group .wpcf7-form-control {
+  width: 100%;
+  border: 2px solid #003399;
+  padding: 8px;
+}
+
+.form-group label {
+  font-weight: 500;
+}
+
+/* Footer Customs */
+.menu-footer-1-container a {
+  font-size: 1.125rem;
+}
+
+.menu-footer-1-container a:hover {
+  font-weight: 500;
 }
