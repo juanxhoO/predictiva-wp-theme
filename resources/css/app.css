@@ -402,13 +402,13 @@ body {
   color: white;
   cursor: pointer;
   background: #C53030;
-  padding: 1rem 3rem;
+  padding: .8rem 3rem;
   font-weight: 500;
   font-size: 1rem;
 }
 
 .wpcf7-submit:hover {
-  background: #003399;
+  background: #b00404;
   transition: 0.6s;
 }
 
@@ -417,17 +417,13 @@ body {
 }
 
 .form-group label {
-  font-weight: 500;
+  color: #0F172A;
 }
 
 .form-group .wpcf7-form-control {
   width: 100%;
-  border: 2px solid #003399;
+  border: 1px solid #0F172A;
   padding: 8px;
-}
-
-.form-group label {
-  font-weight: 500;
 }
 
 /* Footer Customs */
@@ -437,4 +433,9 @@ body {
 
 .menu-footer-1-container a:hover {
   font-weight: 500;
+}
+
+.form-alongside {
+  display: flex;
+  gap: 2rem;
 }

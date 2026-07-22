@@ -11,26 +11,41 @@ $image = $args['image'] ?? '';
 $link = $args['link'] ?? '';
 ?>
 
-<div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full border border-gray-100">
+<div
+    class="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full border border-gray-100 group">
     <?php if ($image): ?>
-        <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($title); ?>" class="w-full h-48 object-cover">
-    <?php else: ?>
-        <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-            <span class="text-gray-400">Sin imagen</span>
-        </div>
+        <a href="<?php echo esc_url($link); ?>" class="block overflow-hidden relative">
+            <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($title); ?>"
+                class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </a>
     <?php endif; ?>
-    
+
     <div class="p-6 flex-grow flex flex-col">
-        <h3 class="text-xl font-bold mb-3 text-slate-800"><?php echo esc_html($title); ?></h3>
-        
-        <?php if ($description): ?>
-            <p class="text-gray-600 mb-6 flex-grow"><?php echo esc_html($description); ?></p>
-        <?php endif; ?>
-        
-        <?php if ($link): ?>
-            <a href="<?php echo esc_url($link); ?>" class="inline-block mt-auto text-center bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                Saber más
+        <h3 class="text-xl font-bold mb-4 text-slate-800">
+            <a href="<?php echo esc_url($link); ?>"
+                class="hover:text-brand-red transition-colors duration-300 flex flex-col items-start">
+                <span><?php echo esc_html($title); ?></span>
+                <span class="mt-3 w-12 h-1 bg-brand-red transition-all duration-300 group-hover:w-full"></span>
             </a>
+        </h3>
+
+        <?php if ($description): ?>
+            <p class="text-gray-600 mb-6 flex-grow leading-relaxed"><?php echo esc_html($description); ?></p>
+        <?php endif; ?>
+
+        <?php if ($link): ?>
+            <div class="mt-auto px-6 pb-6">
+                <a href="<?php echo esc_url($link); ?>"
+                    class="group flex w-full items-center justify-center rounded-lg bg-brand-blue-light px-6 py-3 font-semibold text-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-brand-red-dark hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-2">
+                    <span>Saber más</span>
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 12h15" />
+                    </svg>
+                </a>
+            </div>
         <?php endif; ?>
     </div>
 </div>

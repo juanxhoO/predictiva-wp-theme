@@ -13,7 +13,7 @@
 <?php do_action('tailpress_content_after'); ?>
 <?php wp_footer(); ?>
 
-<footer id="colophon" class="bg-brand-blue-dark mt-12" role="contentinfo">
+<footer id="colophon" class="bg-brand-blue-dark" role="contentinfo">
     <div class="container mx-auto pt-12 pb-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="space-y-4">
@@ -79,6 +79,14 @@
         </div>
     </div>
 </footer>
+
+<div class="fixed bottom-25 right-8 z-50">
+    <button class="bg-brand-red text-white p-4 rounded-full shadow-lg hover:bg-brand-red-dark transition-colors duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
+    </button>
+</div>
 </div>
 <div class="shadow-layout fixed  w-full h-full">
 </div>
