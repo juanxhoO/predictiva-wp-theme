@@ -54,6 +54,19 @@ add_action('customize_register', function ($wp_customize) {
         'priority' => 50,
     ]);
 
+    // Phone Number
+    $wp_customize->add_setting('whatsapp_number', [
+        'default' => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+
+    $wp_customize->add_control('whatsapp_number', [
+        'label' => __('WhatsApp Number', 'your-theme'),
+        'section' => 'title_tagline', // Site Identity section
+        'type' => 'text',
+        'priority' => 50,
+    ]);
+
     // Email
     $wp_customize->add_setting('site_email', [
         'default' => '',
@@ -116,41 +129,6 @@ add_action('customize_register', function ($wp_customize) {
 
 
 });
-
-// function predictiva_enqueue_scripts()
-// {
-//     // CAMBIA ESTO A 'false' SOLO CUANDO VAYAS A SUBIR EL TEMA A PRODUCCIÓN
-//     $is_development = false;
-
-//     if ($is_development) {
-//         // 1. Inyectamos el cliente de Vite apuntando a tu Linux local (puerto 3000)
-//         wp_enqueue_script('vite-client', 'http://localhost:3000/resources/@vite/client', array(), null, false);
-
-//         // 2. Cargamos tus estilos y scripts de desarrollo directo desde tu entorno local
-//         wp_enqueue_style('predictiva-styles', 'http://localhost:3000/resources/css/app.css', array(), null);
-//         wp_enqueue_script('predictiva-js', 'http://localhost:3000/resources/js/app.js', array(), null, true);
-
-//         // 3. Filtro obligatorio para que el navegador entienda los scripts como módulos de Vite
-//         add_filter('script_loader_tag', function ($tag, $handle, $src) {
-//             if (in_array($handle, ['vite-client', 'predictiva-js'])) {
-//                 return '<script type="module" src="' . esc_url($src) . '"></script>';
-//             }
-//             return $tag;
-//         }, 10, 3);
-
-//     } else {
-//         // Código original de producción de TailPress (cuando corres npm run build)
-//         $manifest_path = get_template_directory() . '/dist/.vite/manifest.json';
-//         if (file_exists($manifest_path)) {
-//             $manifest = json_decode(file_get_contents($manifest_path), true);
-//             wp_enqueue_style('predictiva-styles', get_template_directory_uri() . '/dist/' . $manifest['resources/css/app.css']['file']);
-//             wp_enqueue_script('predictiva-js', get_template_directory_uri() . '/dist/' . $manifest['resources/js/app.js']['file'], array(), null, true);
-//         }
-//     }
-// }
-// add_action('wp_enqueue_scripts', 'predictiva_enqueue_scripts');
-
-
 
 function predictiva_registrar_widgets()
 {

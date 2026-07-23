@@ -18,9 +18,26 @@ while (have_posts()):
             $equipments = new WP_Query([
                 'post_type' => 'equipment',
                 'posts_per_page' => -1,
-                'orderby' => 'menu_order',
-                'order' => 'ASC',
             ]);
+
+            // Sort the posts so that items with order >= 1 show up first,
+            // and items with order 0 (or empty) are pushed to the very bottom.
+            usort($equipments->posts, function ($a, $b) {
+                $val_a = (int) get_post_meta($a->ID, 'order', true);
+                $val_b = (int) get_post_meta($b->ID, 'order', true);
+
+                // If one is 0 and the other isn't, the one that is NOT 0 comes first
+                if ($val_a === 0 && $val_b !== 0)
+                    return 1;
+                if ($val_b === 0 && $val_a !== 0)
+                    return -1;
+
+                // If both are > 0, or both are 0, sort in ascending order
+                if ($val_a === $val_b)
+                    return 0;
+                return ($val_a < $val_b) ? -1 : 1;
+            });
+
 
             if ($equipments->have_posts()):
                 ?>
@@ -30,6 +47,10 @@ while (have_posts()):
                     <?php while ($equipments->have_posts()):
 
                         $equipments->the_post();
+
+                        if (!get_field('show_home')) {
+                            continue;
+                        }
 
                         get_template_part(
                             'template-parts/components/equipment-card',
