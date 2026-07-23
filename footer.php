@@ -1,9 +1,13 @@
 <?php
+
 /**
  * Theme footer template.
  *
  * @package TailPress
  */
+
+$floating_logo_enabled = get_theme_mod('floating_logo_enabled', true);
+$floating_logo_image = get_theme_mod('floating_logo_image', '');
 ?>
 </main>
 
@@ -47,13 +51,13 @@
                                 if (empty($url)) {
                                     continue;
                                 }
-                                ?>
+                            ?>
                                 <a href="<?= esc_url($url) ?>" class="text-xl text-white hover:text-brand-red transition"
                                     target="_blank" rel="noopener noreferrer"
                                     aria-label="<?= esc_attr(ucfirst($network)) ?>">
                                     <?= Icon::social($network) ?>
                                 </a>
-                                <?php
+                            <?php
                             }
                             ?>
                         </div>
@@ -79,14 +83,14 @@
         </div>
     </div>
 </footer>
-
-<div class="fixed bottom-25 right-8 z-50">
-    <button class="bg-brand-red text-white p-4 rounded-full shadow-lg hover:bg-brand-red-dark transition-colors duration-300">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-        </svg>
-    </button>
-</div>
+<?php if ($floating_logo_enabled && !empty($floating_logo_image)):
+?>
+    <div class="fixed bottom-22 right-4 z-50">
+        <img src="<?= esc_url($floating_logo_image) ?>"
+            alt="<?= esc_attr(get_bloginfo('name')) ?> - Contacto"
+            class="w-30 h-30 object-contain">
+    </div>
+<?php endif; ?>
 </div>
 <div class="shadow-layout fixed  w-full h-full">
 </div>

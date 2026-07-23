@@ -267,3 +267,40 @@ add_action('init', function () {
         ]
     );
 });
+
+// Agregar campo para el logo flotante en el Customizer
+add_action('customize_register', function ($wp_customize) {
+    // Sección para el logo flotante
+    $wp_customize->add_section('floating_logo_section', [
+        'title' => __('Logo Flotante', 'tailpress'),
+        'priority' => 30,
+    ]);
+
+    // Campo para subir la imagen
+    $wp_customize->add_setting('floating_logo_image', [
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+
+    $wp_customize->add_control(new WP_Customize_Image_Control(
+        $wp_customize,
+        'floating_logo_image',
+        [
+            'label' => __('Imagen del Logo Flotante', 'tailpress'),
+            'section' => 'floating_logo_section',
+            'settings' => 'floating_logo_image',
+        ]
+    ));
+
+    // Campo para activar/desactivar
+    $wp_customize->add_setting('floating_logo_enabled', [
+        'default' => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ]);
+
+    $wp_customize->add_control('floating_logo_enabled', [
+        'label' => __('Activar Logo Flotante', 'tailpress'),
+        'section' => 'floating_logo_section',
+        'type' => 'checkbox',
+    ]);
+});
